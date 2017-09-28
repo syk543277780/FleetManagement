@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FleetManagementDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rego" Type="nvarchar" MaxLength="20" />
+    <Property Name="Make" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Year" Type="datetime" />
+    <Property Name="Lat" Type="varchar" MaxLength="20" />
+    <Property Name="Log" Type="varchar" MaxLength="20" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Driver" Type="nvarchar" MaxLength="50" />
+    <Property Name="isActivy" Type="bit" />
+  </EntityType>
+  <Function Name="spCreateVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="plate" Type="nvarchar" Mode="In" />
+    <Parameter Name="make" Type="nvarchar" Mode="In" />
+    <Parameter Name="mode" Type="nvarchar" Mode="In" />
+    <Parameter Name="createTime" Type="datetime" Mode="In" />
+    <Parameter Name="driver" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spDeleteVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spEditVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="plate" Type="nvarchar" Mode="In" />
+    <Parameter Name="make" Type="nvarchar" Mode="In" />
+    <Parameter Name="mode" Type="nvarchar" Mode="In" />
+    <Parameter Name="createTime" Type="datetime" Mode="In" />
+    <Parameter Name="driver" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spGetAllVehicles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetCurrentVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="FleetManagementDbModelStoreContainer">
+    <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

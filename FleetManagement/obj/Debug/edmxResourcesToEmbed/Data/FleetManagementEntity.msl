@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FleetManagementDbModelStoreContainer" CdmEntityContainer="FleetManagementDb">
+    <FunctionImportMapping FunctionImportName="spCreateVehicle" FunctionName="FleetManagementDbModel.Store.spCreateVehicle" />
+    <FunctionImportMapping FunctionImportName="spGetAllVehicles" FunctionName="FleetManagementDbModel.Store.spGetAllVehicles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FleetManagementDbModel.spGetAllVehicles_Result">
+          <ScalarProperty Name="Rego" ColumnName="Rego" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Driver" ColumnName="Driver" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spDeleteVehicle" FunctionName="FleetManagementDbModel.Store.spDeleteVehicle" />
+    <FunctionImportMapping FunctionImportName="spEditVehicle" FunctionName="FleetManagementDbModel.Store.spEditVehicle" />
+    <FunctionImportMapping FunctionImportName="spGetCurrentVehicle" FunctionName="FleetManagementDbModel.Store.spGetCurrentVehicle">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FleetManagementDbModel.spGetCurrentVehicle_Result">
+          <ScalarProperty Name="Rego" ColumnName="Rego" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Driver" ColumnName="Driver" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="FleetManagementDbModel.Vehicle">
+        <MappingFragment StoreEntitySet="Vehicle">
+          <ScalarProperty Name="isActivy" ColumnName="isActivy" />
+          <ScalarProperty Name="Driver" ColumnName="Driver" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Log" ColumnName="Log" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Rego" ColumnName="Rego" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

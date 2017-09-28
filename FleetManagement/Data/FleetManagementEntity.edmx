@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FleetManagementDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rego" Type="nvarchar" MaxLength="20" />
+          <Property Name="Make" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="Lat" Type="varchar" MaxLength="20" />
+          <Property Name="Log" Type="varchar" MaxLength="20" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Driver" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActivy" Type="bit" />
+        </EntityType>
+        <Function Name="spCreateVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="plate" Type="nvarchar" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+          <Parameter Name="mode" Type="nvarchar" Mode="In" />
+          <Parameter Name="createTime" Type="datetime" Mode="In" />
+          <Parameter Name="driver" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spDeleteVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="plate" Type="nvarchar" Mode="In" />
+          <Parameter Name="make" Type="nvarchar" Mode="In" />
+          <Parameter Name="mode" Type="nvarchar" Mode="In" />
+          <Parameter Name="createTime" Type="datetime" Mode="In" />
+          <Parameter Name="driver" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spGetAllVehicles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetCurrentVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="FleetManagementDbModelStoreContainer">
+          <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FleetManagementDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FleetManagementDb" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="spCreateVehicle">
+            <Parameter Name="plate" Mode="In" Type="String" />
+            <Parameter Name="make" Mode="In" Type="String" />
+            <Parameter Name="mode" Mode="In" Type="String" />
+            <Parameter Name="createTime" Mode="In" Type="DateTime" />
+            <Parameter Name="driver" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetAllVehicles" ReturnType="Collection(FleetManagementDbModel.spGetAllVehicles_Result)" />
+          <FunctionImport Name="spDeleteVehicle">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditVehicle">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="plate" Mode="In" Type="String" />
+            <Parameter Name="make" Mode="In" Type="String" />
+            <Parameter Name="mode" Mode="In" Type="String" />
+            <Parameter Name="createTime" Mode="In" Type="DateTime" />
+            <Parameter Name="driver" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetCurrentVehicle" ReturnType="Collection(FleetManagementDbModel.spGetCurrentVehicle_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Vehicles" EntityType="FleetManagementDbModel.Vehicle" />
+          </EntityContainer>
+        <ComplexType Name="spGetAllVehicles_Result">
+          <Property Type="String" Name="Rego" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Make" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Year" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Driver" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spGetCurrentVehicle_Result">
+          <Property Type="String" Name="Rego" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Make" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Mode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Year" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Driver" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rego" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="DateTime" Precision="3" />
+          <Property Name="Lat" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Log" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Driver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActivy" Type="Boolean" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FleetManagementDbModelStoreContainer" CdmEntityContainer="FleetManagementDb">
+          <FunctionImportMapping FunctionImportName="spCreateVehicle" FunctionName="FleetManagementDbModel.Store.spCreateVehicle" />
+          <FunctionImportMapping FunctionImportName="spGetAllVehicles" FunctionName="FleetManagementDbModel.Store.spGetAllVehicles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FleetManagementDbModel.spGetAllVehicles_Result">
+                <ScalarProperty Name="Rego" ColumnName="Rego" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spDeleteVehicle" FunctionName="FleetManagementDbModel.Store.spDeleteVehicle" />
+          <FunctionImportMapping FunctionImportName="spEditVehicle" FunctionName="FleetManagementDbModel.Store.spEditVehicle" />
+          <FunctionImportMapping FunctionImportName="spGetCurrentVehicle" FunctionName="FleetManagementDbModel.Store.spGetCurrentVehicle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FleetManagementDbModel.spGetCurrentVehicle_Result">
+                <ScalarProperty Name="Rego" ColumnName="Rego" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="FleetManagementDbModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="isActivy" ColumnName="isActivy" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Log" ColumnName="Log" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Rego" ColumnName="Rego" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

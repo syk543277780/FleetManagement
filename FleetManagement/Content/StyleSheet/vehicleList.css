@@ -1,0 +1,20 @@
+﻿table{
+    position: relative;
+    top: 20px;
+    width: 100%
+}
+
+th {
+        width: 150px;
+    }
+
+tr {
+        line-height: 30px;
+    }
+
+.create-infor {
+    display: inline;
+    position: relative;
+    left: 15px;
+    height: 40px;
+}

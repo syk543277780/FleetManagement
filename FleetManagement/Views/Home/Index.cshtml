@@ -1,0 +1,96 @@
+﻿<h2>Vechile Management</h2>
+
+<button id="btn-create-vehicle" type="button" class="btn" data-toggle="modal" data-target="#VehicleModal">Create Vehicle</button>
+
+<div class="vehicle-display">
+    <table id="list-vehicles" class=".table table-striped">
+        <tr>
+            <th>Plate</th>
+            <th>Make</th>
+            <th>Mode</th>
+            <th>Driver Name</th>
+            <th>Commands</th>
+        </tr>
+    </table>
+
+</div>
+
+@*Pop up Modal to create new Vehicle*@
+<div class="container">
+    <div class="modal fade" id="VehicleModal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Vehicle</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="hiden-value-error" style="display:none;color:red">Please enter plate number</p>
+                    <table>
+                        <tr>
+                            <td><p>Plate</p></td>
+                            <td><input id="create-plate" class="form-control create-infor" type="text" placeholder="Plate Number" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Make</p></td>
+                            <td><input id="create-make" class="form-control create-infor" type="text" placeholder="Car Make" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Mode</p></td>
+                            <td><input id="create-mode" class="form-control create-infor" type="text" placeholder="Car mode" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Driver</p></td>
+                            <td><input id="create-driver" class="form-control create-infor" type="text" placeholder="Driver Name" autocomplete="off" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-create" class="btn btn-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*PopUp Modal to update vehicle*@
+<div class="container">
+    <div class="modal fade" id="update-VehicleModal" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Vehicle</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="hiden-value-update-error" style="display:none;color:red">Please enter plate number</p>
+                    <input type="hidden" id="update-id">
+                    <table>
+                        <tr>
+                            <td><p>Plate</p></td>
+                            <td><input id="update-plate" class="form-control create-infor" type="text" placeholder="Plate Number" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Make</p></td>
+                            <td><input id="update-make" class="form-control create-infor" type="text" placeholder="Car Make" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td><p>Mode</p></td>
+                            <td><input id="update-mode" class="form-control create-infor" type="text" placeholder="Car mode" autocomplete="off" /></td>
+                        </tr>
+                        <tr><td><p>Driver</p></td>
+                            <td><input id="update-driver" class="form-control create-infor" type="text" placeholder="Driver Name" autocomplete="off" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn-update" class="btn btn-default">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/View/index.vehicle.js"></script>
+<link href="~/Content/StyleSheet/vehicleList.css" rel="stylesheet" />

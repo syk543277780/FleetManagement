@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FleetManagementDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FleetManagementDb" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="spCreateVehicle">
+      <Parameter Name="plate" Mode="In" Type="String" />
+      <Parameter Name="make" Mode="In" Type="String" />
+      <Parameter Name="mode" Mode="In" Type="String" />
+      <Parameter Name="createTime" Mode="In" Type="DateTime" />
+      <Parameter Name="driver" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGetAllVehicles" ReturnType="Collection(FleetManagementDbModel.spGetAllVehicles_Result)" />
+    <FunctionImport Name="spDeleteVehicle">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spEditVehicle">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="plate" Mode="In" Type="String" />
+      <Parameter Name="make" Mode="In" Type="String" />
+      <Parameter Name="mode" Mode="In" Type="String" />
+      <Parameter Name="createTime" Mode="In" Type="DateTime" />
+      <Parameter Name="driver" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGetCurrentVehicle" ReturnType="Collection(FleetManagementDbModel.spGetCurrentVehicle_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Vehicles" EntityType="FleetManagementDbModel.Vehicle" />
+  </EntityContainer>
+  <ComplexType Name="spGetAllVehicles_Result">
+    <Property Type="String" Name="Rego" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Make" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Mode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="Year" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Driver" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="spGetCurrentVehicle_Result">
+    <Property Type="String" Name="Rego" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Make" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Mode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="Year" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Driver" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rego" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Make" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Mode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="DateTime" Precision="3" />
+    <Property Name="Lat" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Log" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Driver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isActivy" Type="Boolean" />
+  </EntityType>
+</Schema>
